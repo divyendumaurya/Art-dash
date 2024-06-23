@@ -17,10 +17,9 @@ const Login = () => {
     dispatch(loginUser(userCred)).then((result) => {
       if (result.payload) {
         localStorage.setItem('token', result.payload.token);
-        // localStorage.setItem('refresh_token', result.payload.refresh_token);
         setEmail('');
         setPassword('');
-        // navigate('/user/products');
+        navigate('/artist');
       }
     });
   };

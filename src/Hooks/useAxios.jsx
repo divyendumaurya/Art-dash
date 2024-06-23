@@ -9,27 +9,15 @@ const useAxios = () => {
   });
 
   // Add interceptors for request and response if needed
-
-  // Request interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
-      // Modify the request config if needed
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
       return config;
     },
     (error) => {
-      // Handle request error if needed
-      return Promise.reject(error);
-    }
-  );
-
-  // Response interceptor
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      // Modify the response if needed
-      return response;
-    },
-    (error) => {
-      // Handle response error if needed
       return Promise.reject(error);
     }
   );
