@@ -6,13 +6,17 @@ import ArtistDrawer from './ArtistDrawer';
 
 const ArtistList = () => {
   const dispatch = useDispatch();
-  const { artist, loading, error } = useSelector((state) => state.artist);
+  const { artist, loading, error, currentPage, totalPage } = useSelector((state) => state.artist);
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchArtist());
+    dispatch(fetchArtist({ page: 1, limit: 5 }));
   }, [dispatch]);
+
+  const handlePageChange = (page) => {
+    dispatch(fetchArtist({ page, limit: 5 }));
+  };
 
   const handleDelete = (_id) => {
     dispatch(deleteArtist(_id));
@@ -24,15 +28,17 @@ const ArtistList = () => {
   };
 
   const handleCloseDrawer = () => {
-    setDrawerVisible(false);
+  setDrawerVisible(false);
+  // Wait for the closing animation to finish before clearing the selected artist
+  setTimeout(() => {
     setSelectedArtist(null);
-  };
-
+  }, 300); // Adjust this timeout to match your transition duration
+};
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col justify-center items-center">
       <div className="w-2/3 max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-xl font-bold leading-none text-gray-900 ">Artist List</h5>
@@ -64,7 +70,7 @@ const ArtistList = () => {
                           <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                         </svg>
                       </button>
-                      <Link to={`/user/edit-artist/${artist._id}`}>
+                      <Link to={`/artist/update/${artist._id}`}>
                         <button className="text-blue-600 hover:text-blue-800">
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -90,7 +96,53 @@ const ArtistList = () => {
           </ul>
         </div>
       </div>
-      {selectedArtist && <ArtistDrawer artist={selectedArtist} onClose={handleCloseDrawer} visible={drawerVisible} />}
+      {selectedArtist && (
+            <ArtistDrawer
+                artist={selectedArtist}
+                onClose={handleCloseDrawer}
+                visible={drawerVisible}
+                            />
+                            )}
+
+
+    {/* Pagination component */}
+    <nav aria-label="Page navigation example" className="mt-4 absolute right-[685px]  bottom-10 ">
+        <ul className="inline-flex -space-x-px text-sm">
+          <li>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              Previous
+            </button>
+          </li>
+          {[...Array(totalPage).keys()].map((page) => (
+            <li key={page + 1}>
+              <button
+                onClick={() => handlePageChange(page + 1)}
+                className={`flex items-center justify-center px-3 h-8 leading-tight ${
+                  currentPage === page + 1
+                    ? 'text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
+                    : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                }`}
+              >
+                {page + 1}
+              </button>
+            </li>
+          ))}
+          <li>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPage}
+              className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>                   
+
     </div>
   );
 };

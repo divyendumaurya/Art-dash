@@ -6,6 +6,7 @@ import '../src/index.css';
 import Signup from './Pages/SignUp';
 import ArtistList from './Components/ArtistList';
 import CreateArtist from './Components/CreateArtist';
+import UpdateArtist from './Components/UpdateArtist';
 // import ProductList from './components/ProductList';
 // import CreateProduct from './components/CreateProduct';
 // import EditProduct from './components/EditProduct';
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/artist" element={<ArtistList />} />
           <Route path="/createArtist" element={<CreateArtist/>} />
+          <Route path="/artist/update/:id" element={<UpdateArtist />} />
           {/* <Route path="/user" element={<PrivateRoute />}>
             <Route path="products" element={<ProductList />} />
             <Route path="create-product" element={<CreateProduct />} />
