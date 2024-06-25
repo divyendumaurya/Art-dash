@@ -42,7 +42,7 @@ const ArtistList = () => {
       <div className="w-2/3 max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-xl font-bold leading-none text-gray-900 ">Artist List</h5>
-          <Link to="/createArtist" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+          <Link to="/user/createArtist" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
             Create Artist
           </Link>
         </div>
@@ -70,7 +70,7 @@ const ArtistList = () => {
                           <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                         </svg>
                       </button>
-                      <Link to={`/artist/update/${artist._id}`}>
+                      <Link to={`/user/artist-update/${artist._id}`}>
                         <button className="text-blue-600 hover:text-blue-800">
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />

@@ -41,7 +41,7 @@ const UpdateArtist = () => {
 
     try {
       await dispatch(updateArtist({ _id: id, artistData: formData })).unwrap();
-      navigate('/artist');
+      navigate('/user/artist');
     } catch (error) {
       console.error("Error updating artist:", error);
     } finally {

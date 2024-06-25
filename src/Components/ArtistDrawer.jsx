@@ -28,7 +28,7 @@ const ArtistDrawer = ({ artist, onClose, visible }) => {
     
     
     const handleEdit = () => {
-      navigate(`/artist/update/${artist._id}`);
+      navigate(`/user/artist-update/${artist._id}`);
       onClose(); // Close the drawer after navigating
     };
     

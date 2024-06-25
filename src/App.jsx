@@ -7,6 +7,8 @@ import Signup from './Pages/SignUp';
 import ArtistList from './Components/ArtistList';
 import CreateArtist from './Components/CreateArtist';
 import UpdateArtist from './Components/UpdateArtist';
+import Navbar from './Components/Navbar';
+import PrivateRoute from './Components/PrivateRoute';
 // import ProductList from './components/ProductList';
 // import CreateProduct from './components/CreateProduct';
 // import EditProduct from './components/EditProduct';
@@ -20,21 +22,16 @@ const App = () => {
     <>
       
       <Router>
-      {/* <Navbar/> */}
+        <Navbar/>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/artist" element={<ArtistList />} />
-          <Route path="/createArtist" element={<CreateArtist/>} />
-          <Route path="/artist/update/:id" element={<UpdateArtist />} />
-          {/* <Route path="/user" element={<PrivateRoute />}>
-            <Route path="products" element={<ProductList />} />
-            <Route path="create-product" element={<CreateProduct />} />
-            <Route path="edit-product/:id" element={<EditProduct />} />
-          </Route> */}
-          {/* <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/user" element={<PrivateRoute/>}>
+            <Route path="artist" element={<ArtistList />} />
+            <Route path="createArtist" element={<CreateArtist/>} />
+            <Route path="artist-update/:id" element={<UpdateArtist />} />
+          </Route>
         </Routes>
       </Router>
     </>

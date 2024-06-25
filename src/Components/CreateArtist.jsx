@@ -28,7 +28,7 @@ const CreateArtist = () => {
 
     dispatch(createArtist(artistData))
       .then(() => {
-        navigate('/artist');
+        navigate('/user/artist');
       })
       .catch((error) => {
         console.error("Error creating artist:", error);

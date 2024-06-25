@@ -19,7 +19,7 @@ const Login = () => {
         localStorage.setItem('token', result.payload.token);
         setEmail('');
         setPassword('');
-        navigate('/artist');
+        navigate('/user/artist');
       }
     });
   };
