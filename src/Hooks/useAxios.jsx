@@ -5,7 +5,8 @@ const BASE_URL ='https://test.solz.me/api/v1/'
 
 const useAxios = () => {
   const axiosInstance = axios.create({
-    baseURL: BASE_URL // Replace with your base URL
+    baseURL: BASE_URL, // Replace with your base URL
+    // withCredentials: true
   });
 
   // Add interceptors for request and response if needed

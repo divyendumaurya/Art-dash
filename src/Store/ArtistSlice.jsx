@@ -3,12 +3,7 @@ import useAxios from '../Hooks/useAxios';
 
 const axios = useAxios();
 
-// Async Thunks
-// export const fetchArtist = createAsyncThunk('artist/fetchArtist', async () => {
-//   const response = await axios.get("artist?page=1&limit=5");
-//   console.log(response.data);
-//   return response.data;
-// });
+
 export const fetchArtist = createAsyncThunk('artist/fetchArtist', async ({ page, limit }) => {
     const response = await axios.get(`artist?page=${page}&limit=${limit}`);
     console.log(response.data);

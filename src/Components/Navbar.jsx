@@ -1,21 +1,42 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+// import Cookies from 'js-cookie';
+// import useAxios from '../Hooks/useAxios';
 
 const Navbar = () => {
   const navigate = useNavigate();
+//   const axios = useAxios();
   const isLoggedIn = !!localStorage.getItem('token');
+
+
+// UserLoggedIn 
+// const isLoggedIn = !!Cookies.get('session');
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');
      navigate('/');
   };
 
+// const handleLogout = () => {
+    
+//     Cookies.remove('session'); // Clear the session cookie
+
+//     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; // Clear the HttpOnly cookie to expire
+
+//     //  remove the Authorization header
+//     axios.defaults.headers.common['Authorization'] = null;
+
+//     navigate('/');
+//   };
+
+
   const handleLogin = () => {
     navigate('/login');
   };
 
   return (
-    <nav className="bg-blue-800 text-white border-gray-200 dark:bg-gray-900 shadow-md">
+    <nav className="bg-blue-800 text-white border-gray-200  shadow-md">
       <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
         <Link to="/user/artist" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img

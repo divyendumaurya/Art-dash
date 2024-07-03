@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../Store/UserSlice';
 import { useNavigate, Link } from 'react-router-dom';
+// import Cookies from 'js-cookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ const Login = () => {
     dispatch(loginUser(userCred)).then((result) => {
       if (result.payload) {
         localStorage.setItem('token', result.payload.token);
+        // Cookies.set('session', 'true', { secure: true, sameSite: 'strict' });
         setEmail('');
         setPassword('');
         navigate('/user/artist');

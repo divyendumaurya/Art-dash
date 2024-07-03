@@ -6,7 +6,8 @@ const axios = useAxios();
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async (userCred) => {
-        const request = await axios.post("user/login", userCred);
+        // const request = await axios.post("user/login", userCred , { withCredentials: true });
+        const request = await axios.post("user/login", userCred );
         console.log('API response:', request.data);
         const response = await request.data;
         return response;
